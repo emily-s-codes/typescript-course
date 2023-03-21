@@ -8,7 +8,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //     }
 //     return sumOfNumbers
 // }
-// console.log(sum([1, 3, 5]))
+// OR
+// function sum(x: Array<number>): number {
+//     let sumOfNumbers: number = 0
+//     x.forEach(element =>{
+//     summe += element
+//})
+//     return sumOfNumbers
+// }
+// OR
+// function sum(x: Array<number>): number {
+//     return x.reduce((a, b) => a + b, 0)
+// }
+// console.log('sum', sum([1, 3, 5]))
 // console.log(sum([1, 3, 5, 7]))
 // console.log(sum([]))
 // UEBUNG 2 -- Summe mit Type-Union
@@ -45,6 +57,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //     if (Array.isArray(x)) return x[x.length - 1]
 //     else return x
 // }
+// OR 
+// function genericLast2<T>(x: Array<T> | T): T | undefined { // can return undefined because genericLast() can return undefined
+//     if (Array.isArray(x)) {
+//         return genericLast(x)
+//     }
+//     return x
+// }
 // console.log(genericLast2([1, 2, 3]))
 // console.log(genericLast2(2))
 // console.log(genericLast2(true))
@@ -52,13 +71,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // console.log(genericLast2([98, 2, 23]))
 // UEBUNG 7 -- Generic Range 
 function genericRange(x, y, z) {
-    if (y === 0 && z === 0) {
+    if (y < 0) {
+        return [];
+    }
+    if (z > x.length) {
+        return [];
+    }
+    if (z < y) {
+        return [];
+    }
+    if (y === z && z === 0) {
         return x[0];
     }
-    else {
-        return x.slice(0, 2);
-    }
+    else
+        return x.slice(y, z);
 }
-console.log(genericRange([1, 2, 3], 9, 2));
-console.log(genericRange([1, 2, 3], 0, 0));
+console.log('else', genericRange([1, 2, 3, 4, 5], 2, 4));
+console.log('y<0', genericRange([1, 2, 3, 4, 5], -1, 4));
+console.log('z>x.length', genericRange([1, 2, 3], 0, 4));
+console.log('else', genericRange([1, 2, 3], 0, 2));
+console.log('y===z===0', genericRange([1, 2, 3], 0, 0));
+console.log('z<y', genericRange([1, 2, 3], 3, 0));
 //# sourceMappingURL=exercises.js.map
