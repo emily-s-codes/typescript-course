@@ -76,9 +76,10 @@
 //                         name: products[numericalId].name,
 //                         productId: numericalId,
 //                         imageId: fetchedImageId,
-//                         imageUrl: images[fetchedImageId].imageUrl,
-//                         imageData: images[fetchedImageId].imageData,
-//                         altText: images[fetchedImageId].altText
+//                         ...images[fetchedImageId]
+//                         // imageUrl: images[fetchedImageId].imageUrl,
+//                         // imageData: images[fetchedImageId].imageData,
+//                         // altText: images[fetchedImageId].altText
 //                     }
 
 //                 } else {
@@ -96,7 +97,7 @@
 //     return productList
 // }
 
-// // UI: user selects product numbers and with a click calls 'generateProducts' with an array from selected product numbers. User is then shown a list of selected products including an image if available.
+// // // UI: user selects product numbers and with a click calls 'generateProducts' with an array from selected product numbers. User is then shown a list of selected products including an image if available.
 // generateProducts([10, 11, 12, 13])
 
 
@@ -148,13 +149,12 @@ function isCreditCardOrder(order: CreditCardOrder | PayPalOrder): order is Credi
     return 'ccn' in (order as CreditCardOrder);
 };
 
-function runOrders(orders: Order[]): string {
+function runOrders(orders: Order[]): void {
     orders.forEach(order => {
         if (isCreditCardOrder(order as CreditCardOrder))
             processCreditCardOrder(order as CreditCardOrder)
         else processPaypalOrder(order as PayPalOrder)
     })
-    return 'Order processing'
 }
 
 console.log(runOrders([order1, order2, order3]))

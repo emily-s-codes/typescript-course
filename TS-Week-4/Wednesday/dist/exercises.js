@@ -40,7 +40,6 @@ function runOrders(orders) {
         else
             processPaypalOrder(order);
     });
-    return 'Order processing';
 }
 console.log(runOrders([order1, order2, order3]));
 //# sourceMappingURL=exercises.js.map
